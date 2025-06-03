@@ -1,7 +1,7 @@
 import os
 import re
 import gradio as gr
-from easygui import msgbox, boolbox
+from kohya_gui.easygui_dummy import msgbox, ynbox, boolbox
 from .common_gui import get_folder_path, scriptdir, list_dirs, create_refresh_button
 
 from .custom_logging import setup_logging
