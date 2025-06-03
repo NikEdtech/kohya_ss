@@ -12,7 +12,7 @@ try:
 except ImportError:
     visibility = False
 
-from easygui import msgbox
+from kohya_gui.easygui_dummy import msgbox
 from threading import Thread, Event
 from .custom_logging import setup_logging
 from .common_gui import setup_environment
