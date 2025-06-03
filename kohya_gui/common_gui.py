@@ -2,7 +2,7 @@ try:
     from tkinter import filedialog, Tk
 except ImportError:
     pass
-# from easygui import msgbox, ynbox
+from kohya_gui.easygui_dummy import msgbox, ynbox, boolbox
 from typing import Optional
 from .custom_logging import setup_logging
 from .sd_modeltype import SDModelType
