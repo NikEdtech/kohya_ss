@@ -96,7 +96,7 @@ def check_torch():
             log.debug("XPU is available, logging XPU info...")
             log_xpu_info(torch, ipex)
         # Log a warning if no GPU is available
-        elif hasattr(torch, "mps") and torch.mps.is_available():
+        elif hasattr(torch, "mps") and hasattr(torch.mps, "is_available") and torch.mps.is_available():
             log.info("MPS is available, logging MPS info...")
             log_mps_info(torch)
         else:
