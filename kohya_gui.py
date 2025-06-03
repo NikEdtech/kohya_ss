@@ -150,7 +150,10 @@ if __name__ == "__main__":
         if args.requirements is not None:
             validation_command.append(f"--requirements={args.requirements}")
             
-        subprocess.run(validation_command, check=True)
+        try:
+            subprocess.run(validation_command, check=True)
+        except subprocess.CalledProcessError as e:
+            log.error(f"Requirements validation failed: {e}")
 
     # Launch the UI with the provided arguments
     UI(**vars(args))
