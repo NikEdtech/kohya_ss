@@ -18,30 +18,25 @@ def setup_logging(clean=False, debug=False):
     if log is not None:
         return log
 
-    try:
-        if clean and os.path.isfile("setup.log"):
-            os.remove("setup.log")
-        time.sleep(0.1)  # prevent race condition
-    except:
-        pass
+    # безопасный путь для логов
+    log_file = "/tmp/kohya_setup.log"
 
-    if sys.version_info >= (3, 9):
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format="%(asctime)s | %(levelname)s | %(pathname)s | %(message)s",
-            filename="setup.log",
-            filemode="a",
-            encoding="utf-8",
-            force=True,
-        )
-    else:
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format="%(asctime)s | %(levelname)s | %(pathname)s | %(message)s",
-            filename="setup.log",
-            filemode="a",
-            force=True,
-        )
+    try:
+        os.makedirs(os.path.dirname(log_file), exist_ok=True)
+        if clean and os.path.isfile(log_file):
+            os.remove(log_file)
+        time.sleep(0.1)  # prevent race condition
+    except Exception as e:
+        print(f"Log setup warning: {e}")
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s | %(levelname)s | %(pathname)s | %(message)s",
+        filename=log_file,
+        filemode="a",
+        encoding="utf-8",
+        force=True,
+    )
 
     console = Console(
         log_time=True,
